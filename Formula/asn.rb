@@ -17,9 +17,6 @@ class Asn < Formula
   depends_on "nmap"
   depends_on "aha"
 
-
-brew link mtr
-
   livecheck do
     skip "Cannot reliably check for new releases upstream"
   end
