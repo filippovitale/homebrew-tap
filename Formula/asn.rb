@@ -6,6 +6,8 @@ class Asn < Formula
   sha256 "e34f70f6cb9e6c46991130f924d31dfe8cc62abf39846dca328d52213c07a8bd"
   license "MIT"
 
+  depends_on "bash"
+
   livecheck do
     skip "Cannot reliably check for new releases upstream"
   end
