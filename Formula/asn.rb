@@ -7,6 +7,18 @@ class Asn < Formula
   license "MIT"
 
   depends_on "bash"
+  depends_on "coreutils"
+  depends_on "curl"
+  depends_on "whois"
+  depends_on "mtr"
+  depends_on "jq"
+  depends_on "ipcalc"
+  depends_on "grepcidr"
+  depends_on "nmap"
+  depends_on "aha"
+
+
+brew link mtr
 
   livecheck do
     skip "Cannot reliably check for new releases upstream"
