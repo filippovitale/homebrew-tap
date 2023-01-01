@@ -25,6 +25,16 @@ class Asn < Formula
     bin.install "asn"
   end
 
+  def caveats
+    <<~EOS
+      To enable the "AS path tracing" feature, MTR should be in $PATH.
+      One option could be to manually add a symbolic link to the MTR executable:
+        sudo ln -sfn /usr/local/sbin/mtr /usr/local/bin/mtr
+      Another option could be to have in $PATH the dir:
+        /usr/local/sbin
+    EOS
+  end
+
   test do
     assert_match version.to_s, shell_output(%Q|sed -n 's/^ASN_VERSION="\\(.*\\)"$/\\1/p' #{bin}/asn|)
   end
