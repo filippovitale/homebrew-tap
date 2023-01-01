@@ -30,6 +30,7 @@ class Asn < Formula
       To enable the "AS path tracing" feature, MTR should be in $PATH.
       One option could be to manually add a symbolic link to the MTR executable:
         sudo ln -sfn /usr/local/sbin/mtr /usr/local/bin/mtr
+        sudo ln -sfn /usr/local/sbin/mtr-packet /usr/local/bin/mtr-packet
       Another option could be to have in $PATH the dir:
         /usr/local/sbin
     EOS
