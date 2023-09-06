@@ -42,6 +42,7 @@ class Asn < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output("#{bin}/asn -h 2>&1 | head -n 12 | tail -n 1").strip
+    output = shell_output("#{bin}/asn -h 2>&1 | grep --line-buffered -E '\\s+\\d+\\.\\d+' | head -n 1")
+    assert_match version.to_s, output.strip
   end
 end
