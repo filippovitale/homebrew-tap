@@ -1,24 +1,27 @@
 class Asn < Formula
   desc "Organization lookup and server tool (ASN / IPv4 / IPv6 / Prefix / AS Path)"
   homepage "https://github.com/nitefood/asn"
-  url "https://raw.githubusercontent.com/nitefood/asn/a19482aab9a024c7baa425fdd0b899fbd0bfcb09/asn"
-  version "0.74"
-  sha256 "ce4c4775d874fc8574fb503ee40464d2cdda6384d527636c03e1d0eb2adc1223"
+  url "https://github.com/nitefood/asn/archive/refs/tags/v0.74.tar.gz"
+  sha256 "d51895526b1a98ae6865094aac10c1abb05b515005702f5a23ac8e1c60e159e8"
   license "MIT"
+  head "https://github.com/nitefood/asn.git", branch: "master"
 
+
+  depends_on "aha"
   depends_on "bash"
   depends_on "coreutils"
-  depends_on "curl"
-  depends_on "whois"
-  depends_on "mtr"
-  depends_on "jq"
-  depends_on "ipcalc"
   depends_on "grepcidr"
+  depends_on "ipcalc"
+  depends_on "jq"
+  depends_on "mtr"
   depends_on "nmap"
-  depends_on "aha"
+
+  uses_from_macos "curl"
+  uses_from_macos "whois"
 
   livecheck do
-    skip "Cannot reliably check for new releases upstream"
+    url "https://www.example.com/downloads/"
+    regex(/href=.*?example[._-]v?(\d+(?:\.\d+)+)\.t/i)
   end
 
   def install
@@ -39,6 +42,6 @@ class Asn < Formula
   end
 
   test do
-    assert_match version.to_s, shell_output(%Q|sed -n 's/^ASN_VERSION="\\(.*\\)"$/\\1/p' #{bin}/asn|)
+    assert_match version.to_s, shell_output("#{bin}/asn -h 2>&1 | head -n 12 | tail -n 1").strip
   end
 end
