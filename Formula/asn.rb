@@ -6,7 +6,6 @@ class Asn < Formula
   license "MIT"
   head "https://github.com/nitefood/asn.git", branch: "master"
 
-
   depends_on "aha"
   depends_on "bash"
   depends_on "coreutils"
@@ -19,30 +18,17 @@ class Asn < Formula
   uses_from_macos "curl"
   uses_from_macos "whois"
 
-  livecheck do
-    url "https://www.example.com/downloads/"
-    regex(/href=.*?example[._-]v?(\d+(?:\.\d+)+)\.t/i)
+  on_linux do
+    depends_on "bind" # for `host`
   end
 
   def install
     bin.install "asn"
   end
 
-  def caveats
-    <<~EOS
-      To enable the "AS path tracing" feature, MTR should be in $PATH.
-      If a simple brew link doesn't work:
-        brew link mtr
-      One option could be to manually add a symbolic link to the MTR executable:
-        sudo ln -sfn /usr/local/sbin/mtr /usr/local/bin/mtr
-        sudo ln -sfn /usr/local/sbin/mtr-packet /usr/local/bin/mtr-packet
-      Another option could be to have in $PATH the dir:
-        /usr/local/sbin
-    EOS
-  end
-
   test do
-    output = shell_output("#{bin}/asn -h 2>&1 | grep --line-buffered -E '\\s+\\d+\\.\\d+' | head -n 1")
-    assert_match version.to_s, output.strip
+    test_ip = "8.8.8.8"
+    output = shell_output("#{bin}/asn #{test_ip} 2>&1")
+    assert_match "ASN lookup for #{test_ip}", output
   end
 end
