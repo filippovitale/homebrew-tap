@@ -7,6 +7,10 @@ This homebrew tap contains the formulas for tools without enough street rep to g
 Error: 1 problem in 1 cask detected
 ```
 
+### asn
+
+`asn` is now part of HomeBrew (and I am the mantainer)
+
 
 ### mmdbinspect
 
